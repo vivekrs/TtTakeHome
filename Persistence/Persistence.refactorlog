@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="f59b6c26-a04b-44db-b417-3617075f37c7" ChangeDateTime="07/20/2014 15:54:55">
+    <Property Name="ElementName" Value="[dbo].[Transaction].[Tran]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Transaction]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TransactionType" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a34d6c2d-f6ea-43c0-91f3-d78eaf49a4f6" ChangeDateTime="07/20/2014 16:10:44">
+    <Property Name="ElementName" Value="[dbo].[FileTransaction].[Filename]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[FileTransaction]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FileId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5d9ec369-bcd8-44dc-a267-8a719fa897df" ChangeDateTime="07/20/2014 16:10:55">
+    <Property Name="ElementName" Value="[dbo].[FileTransaction].[CreatedOn]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[FileTransaction]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TransactionId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c046d3fe-cb96-4587-ab76-b1ed7f44e449" ChangeDateTime="07/20/2014 16:25:20">
+    <Property Name="ElementName" Value="[dbo].[FileInfo].[SubmittedOn]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[FileInfo]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CreatedOn" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7478ddc7-381f-40cb-a623-443fc4ec8f44" ChangeDateTime="07/20/2014 16:25:26">
+    <Property Name="ElementName" Value="[dbo].[FileInfo].[SubmittedBy]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[FileInfo]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CreatedBy" />
+  </Operation>
+</Operations>

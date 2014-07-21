@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>TT - Upload Controller Data</title>
+    <link href="main.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="container">
+        <div id="header">
+            <h1>
+                TT Take Home Test
+            </h1>
+
+            <h2>
+                Submitted by: Vivek R. Shivaprabhu
+            </h2>
+        </div>
+        <div id="navigation">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a target="_blank" href="http://www.vivekrs.com">About me</a></li>
+                <li><a href="mailto:vivekrs.rsv@gmail.com">Contact (email)</a></li>
+            </ul>
+        </div>
+        <div id="content">
+            <form name="form1" method="post" enctype="multipart/form-data" action="api/upload">
+                <div class="formItem">
+                    <label for="customer">Customer Name</label>
+                    <input name="customer" type="text" />
+                </div>
+                <div class="formItem">
+                    <label for="username">Your (logged-in user) Name</label>
+                    <input name="username" type="text" />
+                </div>
+                <div class="formItem">
+                    <label for="csv">Controller Data File (*.csv)</label>
+                    <input name="csv" type="file" />
+                </div>
+                <div class="formItem">
+                    <input type="submit" value="Submit" />
+                </div>
+            </form>
+
+        </div>
+        <div id="footer">
+            Copyright ©, 2014
+        </div>
+    </div>
+</body>
+</html>

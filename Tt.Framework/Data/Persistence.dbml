@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="TtTakeHome" Class="PersistenceDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\Data\TtTakeHome.mdf;Integrated Security=True" SettingsObjectName="Tt.Framework.Properties.Settings" SettingsPropertyName="TtTakeHomeConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.FileInfo" Member="FileInfos">
+    <Type Name="FileInfo">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Customer" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Filename" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="LocalFilePath" Type="System.String" DbType="VarChar(800) NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedBy" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ProcessedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="FileInfo_FileTransaction" Member="FileTransactions" ThisKey="Id" OtherKey="FileId" Type="FileTransaction" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Transaction]" Member="Transactions">
+    <Type Name="Transaction">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TransactionKey" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="TransactionDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="NetworkId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ExchangeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TransactionType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Product" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedOn" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Transaction_FileTransaction" Member="FileTransactions" ThisKey="Id" OtherKey="TransactionId" Type="FileTransaction" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FileTransaction" Member="FileTransactions">
+    <Type Name="FileTransaction">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FileId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="TransactionId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="FileInfo_FileTransaction" Member="FileInfo" ThisKey="FileId" OtherKey="Id" Type="FileInfo" IsForeignKey="true" />
+      <Association Name="Transaction_FileTransaction" Member="Transaction" ThisKey="TransactionId" OtherKey="Id" Type="Transaction" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

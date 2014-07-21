@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Persistence">
+  <DataContextMoniker Name="/PersistenceDataContext" />
+  <nestedChildShapes>
+    <classShape Id="6bda2b48-b4ad-49e4-8e6b-888079b59e0d" absoluteBounds="0.75, 0.875, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/PersistenceDataContext/FileInfo" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b7b93fb5-1446-4e18-9c06-9ef5e5e0ef2a" absoluteBounds="0.765, 1.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="73420848-6da7-42c6-a553-207297bcb8f5" absoluteBounds="0.75, 5.5, 2, 2.7324039713541675">
+      <DataClassMoniker Name="/PersistenceDataContext/Transaction" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a2f719ce-e707-40e4-b573-49826ff7e968" absoluteBounds="0.765, 5.96, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fccefd3f-9c87-4b23-8d16-e439a71ed603" absoluteBounds="3.5, 1.375, 2, 1.3862939453125003">
+      <DataClassMoniker Name="/PersistenceDataContext/FileTransaction" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0923e108-1fdb-49d4-bf1a-941376355b95" absoluteBounds="3.515, 1.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 2.06814697265625); (3.5 : 2.06814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PersistenceDataContext/FileInfo/FileInfo_FileTransaction" />
+      <nodes>
+        <classShapeMoniker Id="6bda2b48-b4ad-49e4-8e6b-888079b59e0d" />
+        <classShapeMoniker Id="fccefd3f-9c87-4b23-8d16-e439a71ed603" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 6.86620198567708); (4.5 : 6.86620198567708); (4.5 : 2.7612939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PersistenceDataContext/Transaction/Transaction_FileTransaction" />
+      <nodes>
+        <classShapeMoniker Id="73420848-6da7-42c6-a553-207297bcb8f5" />
+        <classShapeMoniker Id="fccefd3f-9c87-4b23-8d16-e439a71ed603" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
