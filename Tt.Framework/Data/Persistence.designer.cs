@@ -36,6 +36,12 @@ namespace Tt.Framework.Data
     partial void DeleteFileTransaction(FileTransaction instance);
     #endregion
 		
+		public PersistenceDataContext() : 
+				base(global::Tt.Framework.Properties.Settings.Default.TtTakeHomeConnectionString, mappingSource)
+		{
+			OnCreated();
+		}
+		
 		public PersistenceDataContext(string connection) : 
 				base(connection, mappingSource)
 		{

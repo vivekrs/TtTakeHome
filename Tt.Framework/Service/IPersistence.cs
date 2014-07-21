@@ -11,5 +11,6 @@ namespace Tt.Framework.Service
         void AddFile(FileInfoDto fileInfoDto);
 
         void AddTransaction(Guid fileInfoId, TransactionDto item);
+        void UpdateProcessedOnForFile(Guid fileInfoId);
     }
 }

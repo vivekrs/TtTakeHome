@@ -4,6 +4,7 @@ using AutoMapper;
 using Ninject;
 using Tt.Framework.Data;
 using Tt.Framework.Models;
+using FileInfo = Tt.Framework.Data.FileInfo;
 
 namespace Tt.Framework.Service
 {
@@ -99,7 +100,7 @@ namespace Tt.Framework.Service
                 }
 
                 //Check if the file-transaction exists
-                if (!db.FileTransactions.Any(ft => ft.FileId == fileInfoId && ft.TransactionId == transactionDto.Id))
+                if (!db.FileTransactions.Any(ft => ft.FileId == fileInfoId && ft.TransactionId == tId))
                 {
                     //If not found, insert into database
                     db.FileTransactions.InsertOnSubmit(new FileTransaction
@@ -110,6 +111,23 @@ namespace Tt.Framework.Service
                     });
                 }
 
+                db.SubmitChanges();
+            }
+        }
+
+        /// <summary>
+        /// Update ProcessedOn DateTime for File
+        /// </summary>
+        /// <param name="fileInfoId"></param>
+        public void UpdateProcessedOnForFile(Guid fileInfoId)
+        {
+            using (var db = new PersistenceDataContext(_cs))
+            {
+                var fileInfo = db.FileInfos.FirstOrDefault(fi => fi.Id == fileInfoId);
+                if (fileInfo == null)
+                    return;
+                
+                fileInfo.ProcessedOn = DateTime.Now;
                 db.SubmitChanges();
             }
         }

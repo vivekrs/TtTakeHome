@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Configuration;
 using System.Diagnostics;
 using System.IO;
-using AutoMapper;
 using Ninject;
 using Tt.Framework.Models;
 
@@ -81,6 +79,8 @@ namespace Tt.Framework.Service
             //Here, we could inject different File Reader objects depending on the file type
             foreach (var item in _fileReader.ReadFile(fileInfo.LocalFilePath))
                 _persistence.AddTransaction(fileInfoId, item);
+
+            _persistence.UpdateProcessedOnForFile(fileInfoId);
 
             Trace.WriteLine(string.Format("File {0} processed.", fileInfo.LocalFilePath));
         }

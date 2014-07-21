@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
-using System.Linq;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading;
@@ -50,7 +49,11 @@ namespace Tt.Service
             Guid nextFile;
             //First, check if there is an unprocessed file
             while ((nextFile = collector.GetNextUnprocessedFile()) != Guid.Empty)
-                collector.ProcessFile(nextFile); //Process the next file
+            {
+                //Process the next file
+                Trace.WriteLine("Processing file " + nextFile);
+                collector.ProcessFile(nextFile);
+            }
 
             //Wait for 10 seconds
             _timer.Change(10000, Timeout.Infinite);
@@ -61,8 +64,16 @@ namespace Tt.Service
         /// </summary>
         protected override void OnStop()
         {
-            _kernel.Dispose();
-            _timer.Dispose();
+        }
+
+        internal void StartService(string[] args)
+        {
+            OnStart(args);
+        }
+
+        internal void StopService()
+        {
+            OnStop();
         }
     }
 }

@@ -1,30 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ninject;
+﻿using Ninject;
+using Ninject.Extensions.Logging.Log4net;
 using Tt.Framework.Service;
 
 namespace Tt.Framework
 {
     /// <summary>
     /// Ideally, these will come from some global configuration system such as a resource file or database
+    /// I did not put it in web.config in the webapi project, or the app.config in the service because of maintenance concerns
     /// </summary>
     public static class DiServiceResources
     {
         private const string BasePath = @"C:\CollectorData";
 
         private const string ConnectionString =
-            @"Data Source=(LocalDB)\v11.0;AttachDbFilename=D:\Docs\Documents\Visual Studio 2013\Projects\Tt_TakeHome_Vivek\Tt.Framework\Data\TtTakeHome.mdf;Integrated Security=True;";
-        
+            @"Data Source=(LocalDB)\v11.0;AttachDbFilename=D:\Docs\Documents\Visual Studio 2013\Projects\TtTakeHome\Tt.Framework\Data\TtTakeHome.mdf;Integrated Security=True;";
+
         /// <summary>
         /// Creates the kernel that will manage your application.
         /// </summary>
         /// <returns>The created kernel.</returns>
         public static IKernel CreateKernel()
         {
+            //log4net.Config.XmlConfigurator.Configure();
+            //var settings = new NinjectSettings { LoadExtensions = false };
             var kernel = new StandardKernel();
             try
             {
@@ -45,10 +43,8 @@ namespace Tt.Framework
         public static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IFileReader>().To<CsvFileReader>();
+            kernel.Bind<IPersistence>().To<SqlPersistence>().WithConstructorArgument("connectionString", ConnectionString);
             kernel.Bind<ICollector>().To<TtCollector>().WithConstructorArgument("collectorBasePath", BasePath);
-            kernel.Bind<IPersistence>()
-                .To<SqlPersistence>()
-                .WithConstructorArgument("connectionString", ConnectionString);
         }
     }
 }
