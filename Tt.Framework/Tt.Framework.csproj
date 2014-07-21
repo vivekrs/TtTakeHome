@@ -76,6 +76,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Persistence.dbml</DependentUpon>
     </Compile>
+    <Compile Include="DiServiceResources.cs" />
     <Compile Include="Models\TransactionDto.cs" />
     <Compile Include="Models\CollectorDataItem.cs" />
     <Compile Include="Models\FileInfoDto.cs" />

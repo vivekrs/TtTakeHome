@@ -62,12 +62,23 @@ namespace Tt.Framework.Service
         }
 
         /// <summary>
+        /// Get the next unprocessed transaction file from the persistence service
+        /// </summary>
+        /// <returns>The Guid of the File Info associated with the unprocessed file. Guid.Empty if not found</returns>
+        public Guid GetNextUnprocessedFile()
+        {
+            return _persistence.GetNextUnprocessedFile();
+        }
+
+        /// <summary>
         /// Process transactions in a collector file and upsert into the database
         /// </summary>
         /// <param name="fileInfoId"></param>
         public void ProcessFile(Guid fileInfoId)
         {
             var fileInfo = _persistence.GetFile(fileInfoId);
+
+            //Here, we could inject different File Reader objects depending on the file type
             foreach (var item in _fileReader.ReadFile(fileInfo.LocalFilePath))
                 _persistence.AddTransaction(fileInfoId, item);
 

@@ -1,5 +1,6 @@
 using System.Configuration;
 using System.Web.Configuration;
+using Tt.Framework;
 using Tt.Framework.Service;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Tt.Rest.App_Start.NinjectWebCommon), "Start")]
@@ -43,13 +44,12 @@ namespace Tt.Rest.App_Start
         /// <returns>The created kernel.</returns>
         private static IKernel CreateKernel()
         {
-            var kernel = new StandardKernel();
+            var kernel = DiServiceResources.CreateKernel();
             try
             {
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
-                RegisterServices(kernel);
                 return kernel;
             }
             catch
@@ -57,21 +57,6 @@ namespace Tt.Rest.App_Start
                 kernel.Dispose();
                 throw;
             }
-        }
-
-        /// <summary>
-        /// Load your modules or register your services here!
-        /// </summary>
-        /// <param name="kernel">The kernel.</param>
-        private static void RegisterServices(IKernel kernel)
-        {
-            kernel.Bind<IFileReader>().To<CsvFileReader>();
-            kernel.Bind<ICollector>()
-                .To<TtCollector>()
-                .WithConstructorArgument("collectorBasePath", WebConfigurationManager.AppSettings["CollectorBasePath"]);
-            kernel.Bind<IPersistence>()
-                .To<SqlPersistence>()
-                .WithConstructorArgument("connectionString", ConfigurationManager.ConnectionStrings["Tt.Rest.Properties.Settings.TtTakeHomeConnectionString"].ConnectionString);
         }
     }
 }
