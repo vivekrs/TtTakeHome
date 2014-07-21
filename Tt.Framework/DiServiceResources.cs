@@ -1,5 +1,4 @@
 ﻿using Ninject;
-using Ninject.Extensions.Logging.Log4net;
 using Tt.Framework.Service;
 
 namespace Tt.Framework
@@ -42,9 +41,27 @@ namespace Tt.Framework
         /// <param name="kernel">The kernel.</param>
         public static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<IFileReader>().To<CsvFileReader>();
-            kernel.Bind<IPersistence>().To<SqlPersistence>().WithConstructorArgument("connectionString", ConnectionString);
-            kernel.Bind<ICollector>().To<TtCollector>().WithConstructorArgument("collectorBasePath", BasePath);
+            kernel.Bind<IFileReader>().To<CsvFileReader>();//.Intercept().With<LoggerInterceptor>();
+            kernel.Bind<IPersistence>().To<SqlPersistence>().WithConstructorArgument("connectionString", ConnectionString);//.Intercept().With<LoggerInterceptor>();
+            kernel.Bind<ICollector>().To<TtCollector>().WithConstructorArgument("collectorBasePath", BasePath);//.Intercept().With<LoggerInterceptor>();
         }
     }
+
+    //public class LoggerInterceptor : SimpleInterceptor
+    //{
+    //    readonly Stopwatch _stopwatch = new Stopwatch();
+
+    //    protected override void BeforeInvoke(IInvocation invocation)
+    //    {
+    //        _stopwatch.Start();
+    //    }
+
+    //    protected override void AfterInvoke(IInvocation invocation)
+    //    {
+    //        _stopwatch.Stop();
+    //        var message = string.Format("Execution of {0} took {1}.", invocation.Request.Method, _stopwatch.Elapsed);
+    //        Console.WriteLine(message); //Replace this with a logger of some sort...
+    //        _stopwatch.Reset();
+    //    }
+    //}
 }

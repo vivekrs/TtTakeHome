@@ -13,9 +13,13 @@ namespace Tt.Rest.Controllers
     public class UploadController : ApiController
     {
         const string AppDataPath = "~/App_Data";
+        private readonly ICollector _collector;
 
         [Inject]
-        public ICollector Collector { get; set; }
+        public UploadController(ICollector collector)
+        {
+            _collector = collector;
+        }
 
         public async Task<HttpResponseMessage> PostFormData()
         {
@@ -56,7 +60,7 @@ namespace Tt.Rest.Controllers
                 {
                     var fileName = file.Headers.ContentDisposition.FileName;
                     fileName = fileName.Substring(1, fileName.Length - 2);
-                    if (Collector.AddCollectorFile(customer, fileName, username, file.LocalFileName))
+                    if (_collector.AddCollectorFile(customer, fileName, username, file.LocalFileName))
                         results += string.Format("{0} uploaded successfully. ", fileName);
                     else
                         results += string.Format("Ignored previously processed file {0}. ", fileName);

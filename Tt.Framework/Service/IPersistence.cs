@@ -7,7 +7,7 @@ namespace Tt.Framework.Service
     {
         bool ContainsFile(string customer, string filename);
         FileInfoDto GetFile(Guid fileInfoId);
-        Guid GetNextUnprocessedFile();
+        Guid GetUnprocessedFileFromDb();
         void AddFile(FileInfoDto fileInfoDto);
 
         void AddTransaction(Guid fileInfoId, TransactionDto item);

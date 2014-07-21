@@ -65,7 +65,7 @@ namespace Tt.Framework.Service
         /// <returns>The Guid of the File Info associated with the unprocessed file. Guid.Empty if not found</returns>
         public Guid GetNextUnprocessedFile()
         {
-            return _persistence.GetNextUnprocessedFile();
+            return _persistence.GetUnprocessedFileFromDb();
         }
 
         /// <summary>
@@ -75,11 +75,17 @@ namespace Tt.Framework.Service
         public void ProcessFile(Guid fileInfoId)
         {
             var fileInfo = _persistence.GetFile(fileInfoId);
+            var iCtr = 0;
 
             //Here, we could inject different File Reader objects depending on the file type
             foreach (var item in _fileReader.ReadFile(fileInfo.LocalFilePath))
+            {
+                if(++iCtr%1000==0)
+                    Console.WriteLine("{0} records processed in {1}", iCtr, fileInfo.Filename);
                 _persistence.AddTransaction(fileInfoId, item);
+            }
 
+            Console.WriteLine("{0} records processed in {1}", iCtr, fileInfo.Filename);
             _persistence.UpdateProcessedOnForFile(fileInfoId);
 
             Trace.WriteLine(string.Format("File {0} processed.", fileInfo.LocalFilePath));

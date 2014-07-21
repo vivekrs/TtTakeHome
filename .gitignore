@@ -23,6 +23,8 @@ build/
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
+*.mdf
+*.ldf
 *_i.c
 *_p.c
 *.ilk

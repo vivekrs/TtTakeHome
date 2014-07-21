@@ -42,6 +42,7 @@ namespace Tt.Rest.App_Start
         private static IKernel CreateKernel()
         {
             var kernel = DiServiceResources.CreateKernel();
+            //var kernel = new StandardKernel();
             try
             {
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
@@ -54,6 +55,6 @@ namespace Tt.Rest.App_Start
                 kernel.Dispose();
                 throw;
             }
-        }  
+        }      
     }
 }

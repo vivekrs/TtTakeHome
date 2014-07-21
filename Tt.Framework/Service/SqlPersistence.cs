@@ -136,7 +136,7 @@ namespace Tt.Framework.Service
         /// Get the next unprocessed transaction file (in the order it was received)
         /// </summary>
         /// <returns>Guid.Empty if there are no unprocessed files</returns>
-        public Guid GetNextUnprocessedFile()
+        public Guid GetUnprocessedFileFromDb()
         {
             using (var db = new PersistenceDataContext(_cs))
             {
