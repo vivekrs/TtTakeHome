@@ -4,7 +4,6 @@ using AutoMapper;
 using Ninject;
 using Tt.Framework.Data;
 using Tt.Framework.Models;
-using FileInfo = Tt.Framework.Data.FileInfo;
 
 namespace Tt.Framework.Service
 {
@@ -13,7 +12,7 @@ namespace Tt.Framework.Service
         private readonly string _cs;
 
         /// <summary>
-        /// Initialize AutoMapper mappings (once statically)
+        ///     Initialize AutoMapper mappings (once statically)
         /// </summary>
         static SqlPersistence()
         {
@@ -24,7 +23,7 @@ namespace Tt.Framework.Service
         }
 
         /// <summary>
-        /// Init
+        ///     Init
         /// </summary>
         /// <param name="connectionString"></param>
         [Inject]
@@ -34,7 +33,7 @@ namespace Tt.Framework.Service
         }
 
         /// <summary>
-        /// Check if the File has already been submitted into the database
+        ///     Check if the File has already been submitted into the database
         /// </summary>
         /// <param name="customer"></param>
         /// <param name="filename"></param>
@@ -48,7 +47,7 @@ namespace Tt.Framework.Service
         }
 
         /// <summary>
-        /// Add a new transaction file (info) to the database
+        ///     Add a new transaction file (info) to the database
         /// </summary>
         /// <param name="file"></param>
         public void AddFile(FileInfoDto file)
@@ -61,7 +60,7 @@ namespace Tt.Framework.Service
         }
 
         /// <summary>
-        /// Get File Info by ID
+        ///     Get File Info by ID
         /// </summary>
         /// <param name="fileInfoId"></param>
         /// <returns></returns>
@@ -75,7 +74,7 @@ namespace Tt.Framework.Service
         }
 
         /// <summary>
-        /// Add a new Transaction to the database
+        ///     Add a new Transaction to the database
         /// </summary>
         /// <param name="fileInfoId"></param>
         /// <param name="transactionDto"></param>
@@ -116,7 +115,7 @@ namespace Tt.Framework.Service
         }
 
         /// <summary>
-        /// Update ProcessedOn DateTime for File
+        ///     Update ProcessedOn DateTime for File
         /// </summary>
         /// <param name="fileInfoId"></param>
         public void UpdateProcessedOnForFile(Guid fileInfoId)
@@ -126,14 +125,14 @@ namespace Tt.Framework.Service
                 var fileInfo = db.FileInfos.FirstOrDefault(fi => fi.Id == fileInfoId);
                 if (fileInfo == null)
                     return;
-                
+
                 fileInfo.ProcessedOn = DateTime.Now;
                 db.SubmitChanges();
             }
         }
 
         /// <summary>
-        /// Get the next unprocessed transaction file (in the order it was received)
+        ///     Get the next unprocessed transaction file (in the order it was received)
         /// </summary>
         /// <returns>Guid.Empty if there are no unprocessed files</returns>
         public Guid GetUnprocessedFileFromDb()

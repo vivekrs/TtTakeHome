@@ -40,7 +40,7 @@ namespace Tt.Rest.Controllers
                 {
                     customer = provider.FormData.GetValues("customer").First();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     customer = "Unknown Cutomer";
                 }
@@ -50,7 +50,7 @@ namespace Tt.Rest.Controllers
                 {
                     username = provider.FormData.GetValues("username").First();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     username = "Anonymous";
                 }
@@ -66,7 +66,7 @@ namespace Tt.Rest.Controllers
                         results += string.Format("Ignored previously processed file {0}. ", fileName);
                 }
 
-                return Request.CreateResponse<string>(HttpStatusCode.OK, results);
+                return Request.CreateResponse(HttpStatusCode.OK, results);
             }
             catch (Exception e)
             {
